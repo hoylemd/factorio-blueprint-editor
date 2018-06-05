@@ -11,6 +11,7 @@ import sampleBP from './sample-blueprint'
 import util from './util'
 import { InventoryContainer } from './containers/inventory'
 import G from './globals'
+window.G = G
 import { EntityContainer } from './containers/entity'
 import { PaintContainer } from './containers/paint'
 import { BlueprintContainer } from './containers/blueprint'
@@ -87,6 +88,7 @@ G.app.renderer.autoResize = true
 G.app.renderer.resize(window.innerWidth, window.innerHeight)
 console.log(`renderer: ${G.app.renderer.width} x ${G.app.renderer.height}`)
 console.log(`view: ${G.app.renderer.view.width} x ${G.app.renderer.view.height}`)
+console.log(`devicePixelRatio: ${window.devicePixelRatio}`)
 window.addEventListener('resize', () => {
     G.app.renderer.resize(window.innerWidth, window.innerHeight)
     G.BPC.zoomPan.setViewPortSize(G.app.renderer.width, G.app.renderer.height)
