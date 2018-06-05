@@ -1,12 +1,24 @@
 import G from '../globals'
 
-export class InfoContainer extends PIXI.Container {
+const config_by_devicePixelRatio = {
+  1: {
+    width_tiles: 18,
+    height_tiles: 26
+  },
+  2: {
+    width_tiles: 18,
+    height_tiles: 22
+  }
+}
+const TILE_SIZE = 31
 
-    iWidth = (32 * 18) / G.pixelRatio
-    iHeight = (32 * 28) / G.pixelRatio
+export class InfoContainer extends PIXI.Container {
 
     constructor() {
         super()
+        const config = config_by_devicePixelRatio[window.devicePixelRatio]
+        this.iWidth = (TILE_SIZE * config.width_tiles)
+        this.iHeight = (TILE_SIZE * config.height_tiles)
 
         this.visible = false
         this.interactive = false
