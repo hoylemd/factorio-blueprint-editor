@@ -76,6 +76,7 @@ G.app = new PIXI.Application({
     resolution: window.devicePixelRatio
     // roundPixels: true
 })
+G.pixelRatio = window.devicePixelRatio
 
 // https://github.com/pixijs/pixi.js/issues/3928
 G.app.renderer.plugins.interaction.moveWhenInside = true
@@ -84,6 +85,8 @@ G.app.renderer.view.style.position = 'absolute'
 G.app.renderer.view.style.display = 'none'
 G.app.renderer.autoResize = true
 G.app.renderer.resize(window.innerWidth, window.innerHeight)
+console.log(`renderer: ${G.app.renderer.width} x ${G.app.renderer.height}`)
+console.log(`view: ${G.app.renderer.view.width} x ${G.app.renderer.view.height}`)
 window.addEventListener('resize', () => {
     G.app.renderer.resize(window.innerWidth, window.innerHeight)
     G.BPC.zoomPan.setViewPortSize(G.app.renderer.width, G.app.renderer.height)

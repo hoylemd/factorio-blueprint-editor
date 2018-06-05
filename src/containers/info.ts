@@ -2,8 +2,8 @@ import G from '../globals'
 
 export class InfoContainer extends PIXI.Container {
 
-    iWidth = 32 * 18
-    iHeight = 32 * 28
+    iWidth = (32 * 18) / G.pixelRatio
+    iHeight = (32 * 28) / G.pixelRatio
 
     constructor() {
         super()
@@ -21,10 +21,11 @@ export class InfoContainer extends PIXI.Container {
         background.tint = 0x3A3A3A
         background.alpha = 0.9
         this.addChild(background)
+        let headerFontSize = 24 / G.pixelRatio
 
         const text = new PIXI.Text('KEYBINDS')
         text.position.set(this.iWidth / 2, 4)
-        text.style.fontSize = 24
+        text.style.fontSize = headerFontSize
         text.style.fontWeight = 'bold'
         text.style.fill = G.UIColors.text
         text.anchor.set(0.5, 0)
@@ -41,7 +42,7 @@ export class InfoContainer extends PIXI.Container {
             '',
             '',
             'Others'
-        ], { x: this.iWidth / 2, y: 40 }, 0.5, true)
+        ], { x: this.iWidth / 2, y: 40 / G.pixelRatio }, 0.5, true)
 
         this.writeColumn([
             '',
@@ -66,7 +67,7 @@ export class InfoContainer extends PIXI.Container {
             'W/A/S/D',
             'click + drag in blueprint area',
             'mouse wheel'
-        ], { x: this.iWidth / 2 - 4, y: 40 }, 1)
+        ], { x: this.iWidth / 2 - 4, y: 40 / G.pixelRatio }, 1)
 
         this.writeColumn([
             '',
@@ -91,7 +92,7 @@ export class InfoContainer extends PIXI.Container {
             'move',
             'move',
             'zoom in/out'
-        ], { x: this.iWidth / 2 + 4, y: 40 })
+        ], { x: this.iWidth / 2 + 4, y: 40 / G.pixelRatio })
 
         this.writeColumn([
             'If you want to rebind the keybinds, check out the readme on github',
@@ -105,18 +106,19 @@ export class InfoContainer extends PIXI.Container {
             '    (F12) to check if something is wrong.',
             'Entities with placeable-off-grid flag will not be added to the positionGrid',
             '    (ex. landmine).'
-        ], { x: 4, y: 500 })
+        ], { x: 4, y: 500 / G.pixelRatio })
 
         this.writeColumn([
             'Please leave your suggestions, ideas, new features or bug reports here:'
-        ], { x: this.iWidth / 2, y: 730 }, 0.5, true)
+        ], { x: this.iWidth / 2, y: 730 / G.pixelRatio }, 0.5, true)
 
+        let normalFontSize = 16 / G.pixelRatio
         const link = new PIXI.Text('Reddit Post')
         link.interactive = true
         link.buttonMode = true
         link.on('click', () => window.open('https://redd.it/87zysk', '_blank'))
-        link.position.set(this.iWidth / 2, 750)
-        link.style.fontSize = 16
+        link.position.set(this.iWidth / 2, 750 / G.pixelRatio)
+        link.style.fontSize = normalFontSize
         link.style.fill = 0x079DD8
         link.anchor.set(0.5, 0)
         this.addChild(link)
@@ -125,8 +127,8 @@ export class InfoContainer extends PIXI.Container {
         link2.interactive = true
         link2.buttonMode = true
         link2.on('click', () => window.open('https://github.com/Teoxoy/factorio-blueprint-editor', '_blank'))
-        link2.position.set(this.iWidth / 2, 770)
-        link2.style.fontSize = 16
+        link2.position.set(this.iWidth / 2, 770 / G.pixelRatio)
+        link2.style.fontSize = normalFontSize
         link2.style.fill = 0x0AA0DB
         link2.anchor.set(0.5, 0)
         this.addChild(link2)
@@ -135,15 +137,16 @@ export class InfoContainer extends PIXI.Container {
             'Copyright © 2018 Tanasoaia Teodor Andrei',
             'All art assets, spritesheets and other Factorio game data used in this project',
             'belong to Wube Software Ltd and are not for redistribution.'
-        ], { x: this.iWidth / 2, y: 810 }, 0.5, true, 14)
+        ], { x: this.iWidth / 2, y: 810 / G.pixelRatio }, 0.5, true, 14)
     }
 
     writeColumn(data: string[], offset: IPoint, anchorX = 0, bold = false, fontSize = 16) {
         let nextY = 0
+        let lineHeight = 20 / G.pixelRatio
         for (const str of data) {
             const text = new PIXI.Text(str)
-            text.position.set(offset.x, nextY++ * 20 + offset.y)
-            text.style.fontSize = fontSize
+            text.position.set(offset.x , nextY++ * lineHeight + offset.y)
+            text.style.fontSize = fontSize / G.pixelRatio
             if (bold) text.style.fontWeight = 'bold'
             text.style.fill = G.UIColors.text
             text.anchor.set(anchorX, 0)
@@ -152,9 +155,10 @@ export class InfoContainer extends PIXI.Container {
     }
 
     setPosition() {
+        let denominator = 2 * G.pixelRatio
         this.position.set(
-            G.app.renderer.width / 2 - this.iWidth / 2,
-            G.app.renderer.height / 2 - this.iHeight / 2
+            G.app.renderer.width / denominator - this.iWidth / denominator,
+            100 / G.pixelRatio
         )
     }
 

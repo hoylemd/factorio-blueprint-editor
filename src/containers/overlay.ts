@@ -304,6 +304,7 @@ export class OverlayContainer extends PIXI.Container {
     }
 
     updateCursorBoxSize(width: number, height: number) {
+        console.log(width + ',' + height)
         this.cursorBox.removeChildren()
         if (width === 1 && height === 1) {
             const s = PIXI.Sprite.fromFrame('extra-icon:cursor-boxes-32x32-0')

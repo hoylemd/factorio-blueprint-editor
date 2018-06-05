@@ -38,8 +38,8 @@ export class BlueprintContainer extends PIXI.Container {
         this.movementSpeed = 10
 
         this.zoomPan = new ZoomPan(this, G.sizeBPContainer, G.positionBPContainer, {
-            width: G.app.renderer.width,
-            height: G.app.renderer.height
+            width: G.app.renderer.width / G.pixelRatio,
+            height: G.app.renderer.height / G.pixelRatio
         }, 10)
 
         this.movingEntityFilter = new AdjustmentFilter({ red: 0.4, blue: 0.4, green: 1 })

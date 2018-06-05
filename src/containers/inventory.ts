@@ -18,8 +18,10 @@ export class InventoryContainer extends PIXI.Container {
             const img = new PIXI.Container()
             for (const icon of item.icons) {
                 const sprite = PIXI.Sprite.fromFrame(icon.icon)
+                sprite.height = sprite.height / G.pixelRatio
+                sprite.width = sprite.width / G.pixelRatio
                 if (icon.scale) sprite.scale.set(icon.scale, icon.scale)
-                if (icon.shift) sprite.position.set(icon.shift[0], icon.shift[1])
+                if (icon.shift) sprite.position.set(icon.shift[0] / G.pixelRatio, icon.shift[1] / G.pixelRatio)
                 if (icon.tint) {
                     const t = icon.tint
                     sprite.filters = [new AdjustmentFilter({
@@ -42,8 +44,8 @@ export class InventoryContainer extends PIXI.Container {
     iconGutter = 36
     inventoryActiveGroup: PIXI.Sprite
     inventoryGroup: Map<PIXI.Sprite, PIXI.Container> = new Map()
-    iWidth = 32 * 12
-    iHeight = 32 * 13
+    iWidth = (32 * 12) / G.pixelRatio
+    iHeight = (32 * 13) / G.pixelRatio
 
     constructor() {
         super()
@@ -66,18 +68,19 @@ export class InventoryContainer extends PIXI.Container {
 
         this.itemTooltip = new PIXI.Text('')
         this.itemTooltip.style.fill = G.UIColors.text
-        this.itemTooltip.y = 352
+        this.itemTooltip.y = 352 / G.pixelRatio
         this.addChild(this.itemTooltip)
 
         this.recipeVisualization = new PIXI.Container()
-        this.recipeVisualization.position.set(16, 384 + 16)
+        this.recipeVisualization.position.set(16 / G.pixelRatio, (384 + 16) / G.pixelRatio)
         this.addChild(this.recipeVisualization)
     }
 
     setPosition() {
+        let denominator = 2 * G.pixelRatio
         this.position.set(
-            G.app.renderer.width / 2 - this.iWidth / 2,
-            G.app.renderer.height / 2 - this.iHeight / 2
+            G.app.renderer.width / denominator - this.iWidth / denominator,
+            G.app.renderer.height / denominator - this.iHeight / denominator
         )
     }
 
@@ -107,8 +110,8 @@ export class InventoryContainer extends PIXI.Container {
                             nextK = 0
                         }
 
-                        img.x = nextK * this.iconGutter + 16
-                        img.y = 64 + nextJ * this.iconGutter + 16
+                        img.x = (nextK * this.iconGutter + 16) / G.pixelRatio
+                        img.y = (64 + nextJ * this.iconGutter + 16) / G.pixelRatio
                         img.interactive = true
                         img.buttonMode = true
 
