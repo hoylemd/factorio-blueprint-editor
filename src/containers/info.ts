@@ -21,7 +21,7 @@ export class InfoContainer extends PIXI.Container {
         background.tint = 0x3A3A3A
         background.alpha = 0.9
         this.addChild(background)
-        let headerFontSize = 24 / G.pixelRatio
+        const headerFontSize = 24
 
         const text = new PIXI.Text('KEYBINDS')
         text.position.set(this.iWidth / 2, 4)
@@ -112,7 +112,7 @@ export class InfoContainer extends PIXI.Container {
             'Please leave your suggestions, ideas, new features or bug reports here:'
         ], { x: this.iWidth / 2, y: 730 / G.pixelRatio }, 0.5, true)
 
-        let normalFontSize = 16 / G.pixelRatio
+        const normalFontSize = 16
         const link = new PIXI.Text('Reddit Post')
         link.interactive = true
         link.buttonMode = true
@@ -142,11 +142,11 @@ export class InfoContainer extends PIXI.Container {
 
     writeColumn(data: string[], offset: IPoint, anchorX = 0, bold = false, fontSize = 16) {
         let nextY = 0
-        let lineHeight = 20 / G.pixelRatio
+        const lineHeight = 20
         for (const str of data) {
             const text = new PIXI.Text(str)
             text.position.set(offset.x , nextY++ * lineHeight + offset.y)
-            text.style.fontSize = fontSize / G.pixelRatio
+            text.style.fontSize = fontSize
             if (bold) text.style.fontWeight = 'bold'
             text.style.fill = G.UIColors.text
             text.anchor.set(anchorX, 0)
@@ -155,7 +155,7 @@ export class InfoContainer extends PIXI.Container {
     }
 
     setPosition() {
-        let denominator = 2 * G.pixelRatio
+        const denominator = 2 * G.pixelRatio
         this.position.set(
             G.app.renderer.width / denominator - this.iWidth / denominator,
             100 / G.pixelRatio
